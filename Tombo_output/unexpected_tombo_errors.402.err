@@ -1,0 +1,42 @@
+BaseCalled_template:::/media/localarchive/Tombo_processing/ont-guppy_bc_IRoutput/SingleFast5s/78caa75a-4383-4f23-9770-6e014a54b656.fast5
+:::
+Traceback (most recent call last):
+  File "/home/phe.gov.uk/stanislav.polozov/miniconda3/lib/python3.7/site-packages/tombo/tombo_helper.py", line 94, in banded_traceback
+    return c_banded_traceback(*args, **kwargs)
+  File "tombo/_c_dynamic_programming.pyx", line 305, in tombo._c_dynamic_programming.c_banded_traceback
+NotImplementedError: Read event to sequence alignment extends beyond bandwidth
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/phe.gov.uk/stanislav.polozov/miniconda3/lib/python3.7/site-packages/tombo/resquiggle.py", line 1575, in _resquiggle_worker
+    map_res, rsqgl_params, fast5_fn, all_raw_signal)
+  File "/home/phe.gov.uk/stanislav.polozov/miniconda3/lib/python3.7/site-packages/tombo/resquiggle.py", line 1491, in run_rsqgl_iters
+    seq_samp_type=seq_samp_type)
+  File "/home/phe.gov.uk/stanislav.polozov/miniconda3/lib/python3.7/site-packages/tombo/resquiggle.py", line 1168, in resquiggle_read
+    seq_samp_type=seq_samp_type, reg_id=map_res.align_info.ID)
+  File "/home/phe.gov.uk/stanislav.polozov/miniconda3/lib/python3.7/site-packages/tombo/resquiggle.py", line 1038, in find_adaptive_base_assignment
+    rsqgl_params.band_bound_thresh)
+  File "/home/phe.gov.uk/stanislav.polozov/miniconda3/lib/python3.7/site-packages/tombo/tombo_helper.py", line 96, in banded_traceback
+    raise TomboError(unicode(e))
+tombo.tombo_helper.TomboError: Read event to sequence alignment extends beyond bandwidth
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/phe.gov.uk/stanislav.polozov/miniconda3/lib/python3.7/site-packages/tombo/resquiggle.py", line 1583, in _resquiggle_worker
+    map_res, save_params, fast5_fn, all_raw_signal)
+  File "/home/phe.gov.uk/stanislav.polozov/miniconda3/lib/python3.7/site-packages/tombo/resquiggle.py", line 1491, in run_rsqgl_iters
+    seq_samp_type=seq_samp_type)
+  File "/home/phe.gov.uk/stanislav.polozov/miniconda3/lib/python3.7/site-packages/tombo/resquiggle.py", line 1168, in resquiggle_read
+    seq_samp_type=seq_samp_type, reg_id=map_res.align_info.ID)
+  File "/home/phe.gov.uk/stanislav.polozov/miniconda3/lib/python3.7/site-packages/tombo/resquiggle.py", line 1028, in find_adaptive_base_assignment
+    fwd_pass, fwd_pass_move, band_event_starts, shifted_z_scores = run_fwd_pass()
+  File "/home/phe.gov.uk/stanislav.polozov/miniconda3/lib/python3.7/site-packages/tombo/resquiggle.py", line 899, in run_fwd_pass
+    mapped_start_offset, rsqgl_params, events_per_base)
+  File "/home/phe.gov.uk/stanislav.polozov/miniconda3/lib/python3.7/site-packages/tombo/resquiggle.py", line 676, in _get_masked_start_fwd_pass
+    shifted_z_scores[seq_pos,:] = get_start_mask_z_score(seq_pos, event_pos)
+  File "/home/phe.gov.uk/stanislav.polozov/miniconda3/lib/python3.7/site-packages/tombo/resquiggle.py", line 661, in get_start_mask_z_score
+    event_vals, r_ref_means[seq_pos], r_ref_sds[seq_pos],
+IndexError: index 443 is out of bounds for axis 0 with size 443
+
