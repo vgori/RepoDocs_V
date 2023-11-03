@@ -93,3 +93,4 @@ function search_for_guppy_output_folder() {
     else
 		echo "Error: Input folder do not exist."
 		exit 1
+	fi
