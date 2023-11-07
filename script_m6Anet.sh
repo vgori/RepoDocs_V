@@ -9,8 +9,8 @@ export HDF5_PLUGIN_PATH="/usr/local/hdf5/lib/plugin"
 basecalled_dirs="$1" #"/path/to/common/folder/basecalled"  
 basecalled_dirs="${basecalled_dirs%/}" # remove trailing slash (if any)
 setname="${basecalled_dirs##*/}"
-ifolder=$(ls $basecalled_dirs)
-path_to_fast5_pass=$(find $basecalled_dirs/$ifolder -name "fast5_pass" -type d)
+#ifolder=$(ls $basecalled_dirs)
+path_to_fast5_pass=$(find $basecalled_dirs -name "fast5_pass" -type d)
 Reference_Genome="/media/localarchive/transcriptome_ref"
 
 # Recursive function to search for the "workspace" folder with basecalled fast5
@@ -69,7 +69,9 @@ function search_for_guppy_output_folder() {
         echo -e "${BGreen} gather fastq_s in single fastq file"
         cat $fastq_pass_result/*.fastq > $basecalled_dirs/processing_nanopolish/single_fastq_$setname.fastq 
         echo -e "${BGreen} Launching nanopolish indexing"
-        nanopolish index -d $path_to_fast5_pass -s $ssummary_txt $basecalled_dirs/processing_nanopolish/single_fastq_$setname.fastq
+        echo -e "Found 'sequencing_summary.txt' file at: ${ssummary_txt}"
+        echo -e "Found 'fast5_pass' folder at: ${path_to_fast5_pass}"
+        nanopolish index -s $ssummary_txt -d $path_to_fast5_pass $basecalled_dirs/processing_nanopolish/single_fastq_$setname.fastq
         echo -e "${BGreen} Launching minimap2 with splice -k14"
         minimap2 -ax splice -uf -k14 $Reference_Genome/Homo_sapiens.GRCh38.cdna.all.fa $basecalled_dirs/processing_nanopolish/single_fastq_$setname.fastq | samtools sort -T tmp -o $basecalled_dirs/processing_nanopolish/output_sorted_$setname.bam
         samtools index $basecalled_dirs/processing_nanopolish/output_sorted_$setname.bam
