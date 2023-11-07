@@ -46,6 +46,7 @@ function search_for_guppy_output_folder() {
 			    guppy_folder=$(search_for_guppy_output_folder "${basecalled_dirs}")
                 fastq_pass_result=$guppy_folder/pass
 				fast5_pass_result=$guppy_folder/workspace
+				ssummary_txt=$guppy_folder/sequencing_summary.txt
 				#sstxt_result=$(search_for_sstxt_folder "${subfolder}")		
 
 				if [ ! -d $fastq_pass_result ] || [ ! -d $fast5_pass_result ]; then
@@ -68,7 +69,7 @@ function search_for_guppy_output_folder() {
         echo -e "${BGreen} gather fastq_s in single fastq file"
         cat $fastq_pass_result/*.fastq > $basecalled_dirs/processing_nanopolish/single_fastq_$setname.fastq 
         echo -e "${BGreen} Launching nanopolish indexing"
-        nanopolish index -d $path_to_fast5_pass $basecalled_dirs/processing_nanopolish/single_fastq_$setname.fastq
+        nanopolish index -d $path_to_fast5_pass -s $ssummary_txt $basecalled_dirs/processing_nanopolish/single_fastq_$setname.fastq
         echo -e "${BGreen} Launching minimap2 with splice -k14"
         minimap2 -ax splice -uf -k14 $Reference_Genome/Homo_sapiens.GRCh38.cdna.all.fa $basecalled_dirs/processing_nanopolish/single_fastq_$setname.fastq | samtools sort -T tmp -o $basecalled_dirs/processing_nanopolish/output_sorted_$setname.bam
         samtools index $basecalled_dirs/processing_nanopolish/output_sorted_$setname.bam
