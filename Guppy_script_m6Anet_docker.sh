@@ -77,8 +77,8 @@ function search_for_guppy_output_folder() {
 		# /media/localarchive:/localarchive
 		sudo docker pull quay.io/biocontainers/nanopolish:0.14.0--h773013f_3
         sudo docker run --rm -v /media:/media quay.io/biocontainers/nanopolish:0.14.0--h773013f_3 nanopolish index \
-        -d $path_to_fast5_pass $basecalled_dirs/processing_nanopolish/single_fastq_$setname.fastq \
-        -s $ssummary_txt
+        -d $path_to_fast5_pass $basecalled_dirs/processing_nanopolish/single_fastq_$setname.fastq #\
+        #-s $ssummary_txt
         echo -e "${BGreen} Launching minimap2 with splice -k14"
         minimap2 -ax splice -uf -k14 $Reference_Genome/Homo_sapiens.GRCh38.cdna.all.fa $basecalled_dirs/processing_nanopolish/single_fastq_$setname.fastq | samtools sort -T tmp -o $basecalled_dirs/processing_nanopolish/output_sorted_$setname.bam
         samtools index $basecalled_dirs/processing_nanopolish/output_sorted_$setname.bam
