@@ -12,7 +12,7 @@ setname="${basecalled_dirs##*/}"
 #ifolder=$(ls $basecalled_dirs)
 path_to_fast5_pass=$(find $basecalled_dirs -name "fast5_pass" -type d)
 search_for_dorado_output_folder=$(find $basecalled_dirs -name "pass-basecalled" -type d)
-Reference_Genome="/data/Reference_Genome_HomoSapiens"
+Reference_Genome="/media/localarchive/transcriptome_ref"
 # Find the summary_file with the specified pattern
 summary_file=$(find $basecalled_dirs -type f -name "sequencing_summary_*.txt")
 if the summary_file is foundif [ -z "$summary_file" ]; then
