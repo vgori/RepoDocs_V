@@ -49,8 +49,8 @@ summary_file="sequencing_summary.txt"
 		# /media/localarchive:/localarchive
 		sudo docker pull quay.io/biocontainers/nanopolish:0.14.0--h773013f_3
         sudo docker run --rm -v /media:/media quay.io/biocontainers/nanopolish:0.14.0--h773013f_3 nanopolish index \
-        -d $path_to_fast5_pass $basecalled_dirs/processing_nanopolish/single_fastq_$setname.fastq #\
-        #-s $ssummary_txt
+        -d $path_to_fast5_pass $basecalled_dirs/processing_nanopolish/single_fastq_$setname.fastq \
+        -s $ssummary_txt
         echo -e "${BGreen} Launching minimap2 with splice -k14"
         minimap2 -ax splice -uf -k14 $Reference_Genome/Homo_sapiens.GRCh38.cdna.all.fa $basecalled_dirs/processing_nanopolish/single_fastq_$setname.fastq | samtools sort -T tmp -o $basecalled_dirs/processing_nanopolish/output_sorted_$setname.bam
         samtools index $basecalled_dirs/processing_nanopolish/output_sorted_$setname.bam
@@ -59,17 +59,18 @@ summary_file="sequencing_summary.txt"
         --reads $basecalled_dirs/processing_nanopolish/single_fastq_$setname.fastq \
         --bam $basecalled_dirs/processing_nanopolish/output_sorted_$setname.bam \
         --genome $Reference_Genome/Homo_sapiens.GRCh38.cdna.all.fa \
+		-t 10 \
         --scale-events > $basecalled_dirs/processing_nanopolish/eventalign.txt
         
 		### m6Anet ###
         echo -e "${BGreen} Launching docker of m6Anet"
         sudo docker pull quay.io/biocontainers/m6anet:2.1.0--pyhdfd78af_0
         sudo docker run --rm -v /media:/media quay.io/biocontainers/m6anet:2.1.0--pyhdfd78af_0 m6anet dataprep --eventalign $basecalled_dirs/processing_nanopolish/eventalign.txt \
-                    --out_dir $basecalled_dirs/processing_m6anet/output_dataprep --n_processes 4
+                    --out_dir $basecalled_dirs/processing_m6anet/output_dataprep --n_processes 6
 					
 
         sudo docker run --rm -v /media:/media quay.io/biocontainers/m6anet:2.1.0--pyhdfd78af_0 m6anet inference --input_dir $basecalled_dirs/processing_m6anet/output_dataprep/ \
-        --out_dir $basecalled_dirs/processing_m6anet/output_m6anet --n_processes 4 --num_iterations 1000
+        --out_dir $basecalled_dirs/processing_m6anet/output_m6anet --n_processes 6 --num_iterations 1000
 
 	
     else
