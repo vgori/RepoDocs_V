@@ -13,7 +13,13 @@ setname="${basecalled_dirs##*/}"
 path_to_fast5_pass=$(find $basecalled_dirs -name "fast5_pass" -type d)
 search_for_dorado_output_folder=$(find $basecalled_dirs -name "pass-basecalled" -type d)
 Reference_Genome="/data/Reference_Genome_HomoSapiens"
-summary_file="sequencing_summary.txt"
+# Find the summary_file with the specified pattern
+summary_file=$(find $basecalled_dirs -type f -name "sequencing_summary_*.txt")
+if the summary_file is foundif [ -z "$summary_file" ]; then
+    echo "No summary_file found with the specified pattern"    exit 1
+fi
+# Output the found summary_file pathecho "Found summary_file: $summary_file"
+# Example of how to use the summary_file path in a subsequent command
 
 # Iterate over each set basecalled_dirs
 
@@ -25,8 +31,8 @@ summary_file="sequencing_summary.txt"
 			    #dorado_folder=$(search_for_dorado_output_folder "${basecalled_dirs}")
 				dorado_folder=$search_for_dorado_output_folder
                 fastq_pass_result=$dorado_folder/pass
-				ssummary_txt="${dorado_folder%/*}/$summary_file"
-				#sstxt_result=$(search_for_sstxt_folder "${subfolder}")		
+				ssummary_txt=$summary_file
+				#ssummary_txt="${dorado_folder%/*}/$summary_file"	
                
                 if [[ -n "${fastq_pass_result}" ]]; then
                     echo "Found 'pass' folder at: ${fastq_pass_result}"
