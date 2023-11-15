@@ -59,7 +59,7 @@ summary_file="sequencing_summary.txt"
         --reads $basecalled_dirs/processing_nanopolish/single_fastq_$setname.fastq \
         --bam $basecalled_dirs/processing_nanopolish/output_sorted_$setname.bam \
         --genome $Reference_Genome/Homo_sapiens.GRCh38.cdna.all.fa \
-		-t 10 \
+        -t 10 \
         --scale-events > $basecalled_dirs/processing_nanopolish/eventalign.txt
         
 		### m6Anet ###
