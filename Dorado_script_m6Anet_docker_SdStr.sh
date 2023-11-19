@@ -64,6 +64,7 @@ fi
         --reads $basecalled_dirs/processing_nanopolish/single_fastq_$setname.fastq \
         --bam $basecalled_dirs/processing_nanopolish/output_sorted_$setname.bam \
         --genome $Reference_Genome/Homo_sapiens.GRCh38.cdna.all.fa \
+	--signal-index \
         -t 10 \
         --scale-events > $basecalled_dirs/processing_nanopolish/eventalign.txt
         
