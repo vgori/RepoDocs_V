@@ -128,12 +128,12 @@ elapsed_eventalign=$((end_eventalign - start_eventalign))
 elapsed_dataprep=$((end_m6Anet_dataprep - start_m6Anet_dataprep))
 elapsed_inference=$((end_m6Anet_inference - start_m6Anet_inference))
 # Overall time in day hour minutes seconds format
-day_hour_min_sec=$(date -ud "@$elapsed" +'%H hours %M minutes %S seconds')
-day_hour_min_sec_map=$(date -ud "@$elapsed_map" +'%H hours %M minutes %S seconds')
-day_hour_min_sec_samindex=$(date -ud "@$elapsed_samindex" +'%H hours %M minutes %S seconds')
-day_hour_min_sec_eventalign=$(date -ud "@$elapsed_eventalign" +'%H hours %M minutes %S seconds')
-day_hour_min_sec_dataprep=$(date -ud "@$elapsed_dataprep" +'%H hours %M minutes %S seconds')
-day_hour_min_sec_inference=$(date -ud "@$elapsed_inference" +'%H hours %M minutes %S seconds')
+day_hour_min_sec=$(date -ud "@$elapsed" +'%d days %H hours %M minutes %S seconds')
+day_hour_min_sec_map=$(date -ud "@$elapsed_map" +'%d days %H hours %M minutes %S seconds')
+day_hour_min_sec_samindex=$(date -ud "@$elapsed_samindex" +'%d days %H hours %M minutes %S seconds')
+day_hour_min_sec_eventalign=$(date -ud "@$elapsed_eventalign" +'%d days %H hours %M minutes %S seconds')
+day_hour_min_sec_dataprep=$(date -ud "@$elapsed_dataprep" +'%d days %H hours %M minutes %S seconds')
+day_hour_min_sec_inference=$(date -ud "@$elapsed_inference" +'%d days %H hours %M minutes %S seconds')
 echo -e "************************ TIME **************************"
 echo -e "Time points statistics:"
 echo -e "     "
