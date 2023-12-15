@@ -61,12 +61,12 @@ while true; do
 			if [ "$sum" -le 40 ]; then
 			    #echo -ne $(echo -ne "\033[2K\rNothing interesting. Yet.... (GeneCount < 40 : n = $sum)" | sed 's/\x1B\[[0-9;]*[JKmsu]//g') | tee -a "$1"/logfile_genecounts_$(date +%F).log
 				echo -ne "\033[0K\rNothing interesting. Yet.... (GeneCount < 40 : n = $sum)" | tee -a "$1"/logfile_genecounts_$(date +%F).log
-				#echo -ne "Nothing interesting. Yet.... (GeneCount < 40 : n = $sum)"\\r | tee -a "$1"/logfile_genecounts_$(date +%F).log
+				#echo -ne "Nothing interesting for FDXR gene. Yet.... (GeneCount < 40 : n = $sum)"\\r | tee -a "$1"/logfile_genecounts_$(date +%F).log
 				
 			else 
 			    #echo -ne $(echo -ne "\033[2K\rGotcha!!! (GeneCount > 40 : n = $sum)" | sed 's/\x1B\[[0-9;]*[JKmsu]//g') | tee -a "$1"/logfile_genecounts_$(date +%F).log
 				echo -ne "\033[2K\rGotcha!!! (GeneCount > 40 : n = $sum)" | tee -a "$1"/logfile_genecounts_$(date +%F).log
-				#echo -ne "Gotcha!!! (GeneCount > 40 : n = $sum)"\\r | tee -a "$1"/logfile_genecounts_$(date +%F).log
+				#echo -ne "Gotcha FDXR gene!!! (GeneCount > 40 : n = $sum)"\\r | tee -a "$1"/logfile_genecounts_$(date +%F).log
 				
 			fi
 			tput sc
