@@ -38,7 +38,7 @@ k=0
             
 				cat $SHARED_FOLDER/mapped_dir/bc_fastq_pass_tmp/*.fastq > $SHARED_FOLDER/mapped_dir/singlefastq_bam_bai/fastq_single_RUN_NAME_$k.fastq
 				# Run minimap2	
-        	    minimap2 -ax splice -uf -k14 $Reference_Genome/Homo_sapiens2.GRCh38.cdna.all.fa \
+        	    minimap2 -ax splice -uf -k14 $Reference_Genome/Homo_sapiens.GRCh38.cdna.all.fa \
                 $SHARED_FOLDER/mapped_dir/singlefastq_bam_bai/fastq_single_RUN_NAME_$k.fastq | samtools sort \
 	            -T tmp -o $SHARED_FOLDER/mapped_dir/singlefastq_bam_bai/aligned_RUN_NAME_$k.bam
 				
