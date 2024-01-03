@@ -10,4 +10,4 @@ Path to sripts:
 ~/scripts_livemapp/ss_livebc_mapping.sh
 
 Run:
-                ./ss_livebc_timemanager_main.sh /media/localarchive/ONT-data/real-time-tests/test_A transcripts_PRL31
+./ss_livebc_timemanager_main.sh /media/localarchive/ONT-data/real-time-tests/test_A transcripts_FDXR transcripts_DDB2 transcripts_BAX transcripts_PHPT1 transcripts_PUM1 transcripts_HPRT1

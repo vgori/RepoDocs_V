@@ -1,16 +1,33 @@
 #!/bin/bash
 # chmod +x livebc_timemanager_main.sh
 #  sed -i -e 's/\r$//' ss_livebc_timemanager_main.sh
-# ./ss_livebc_timemanager_main.sh /media/localarchive/ONT-data/real-time-tests/test_A transcripts_FDXR
+# ./ss_livebc_timemanager_main.sh /media/localarchive/ONT-data/real-time-tests/test_A transcripts_FDXR transcripts_DDB2 transcripts_BAX transcripts_PHPT1 transcripts_PUM1 transcripts_HPRT1
+
+
+# For more gene names add: transcriptsNames4="$5"..., 
+#                          csv_to_txt_convert ... "transcriptsNames4", ..., ...
+#                          sum4=$(process_files "$Reference_Target/$transcriptsNames4.txt" "$sum4")
+#                          print_gensums 4 "$transcriptsNames4" "$sum4"
+# Change the times of \n:   echo -ne "\n\n\n\033[0K\rNothing interesting for $transcriptsNames.
+#################### GeneNames_N - 1 = echo -ne "\n\n\n\...
+#################### GeneNames_N = last print_gensums N (for the upper N=counts(n\)+N) is 3+4 or 5+6
+
+
+
 SHARED_FOLDER="$1"
 transcriptsNames="$2"
+transcriptsNames2="$3"
+transcriptsNames3="$4"
+transcriptsNames4="$5"
+transcriptsNames5="$6"
+transcriptsNames6="$7"
 shared_dirs="${SHARED_FOLDER%/}" 
 Reference_Target="/media/localarchive/transcriptome_ref/Target_GeneTranscripts"
 sample_id=$(basename "$SHARED_FOLDER") #test_A
 experiment_group=$(basename "$(dirname "$SHARED_FOLDER")") # real-time-tests
 parent_dir=$(dirname $(dirname "$SHARED_FOLDER")) # /media/localarchive/ONT-data
 t=1
-mapp_time=30
+mapp_time=60
 n_irr_threshold=40
 
 # "SHARED_FOLDER" is a "$1" entred script folder for outputs collection
@@ -35,8 +52,39 @@ while [ ! "$(ls -A $SHARED_FOLDER/mapped_dir/singlefastq_bam_bai 2>/dev/null)" ]
   sleep $t
 done
 # convert a CSV file to a TXT file and delete the header
-tail -n +2 "$Reference_Target/$transcriptsNames.csv" > "$Reference_Target/$transcriptsNames.txt"
+#tail -n +2 "$Reference_Target/$transcriptsNames.csv" > "$Reference_Target/$transcriptsNames.txt"
+function csv_to_txt_convert() {
+    for genename_f in $@ ; do
+	    tail -n +2 "$Reference_Target/$genename_f.csv" > "$Reference_Target/$genename_f.txt"
+	done
+}
+csv_to_txt_convert "$transcriptsNames1"  "$transcriptsNames2" "$transcriptsNames3" "$transcriptsNames4" "$transcriptsNames5" "$transcriptsNames6"
+
 mkdir $SHARED_FOLDER/mapped_dir/bam_saved
+
+function process_files() {
+    local sum=$2
+	for file in "$1"; do
+        # Read the list of transcripts into an array
+        transcripts=($(cat "$file"))
+        # Build the samtools view count_mapped_reads_to_Gene
+        count_mapped_reads_to_Gene="samtools view -c -F 0x4 $bam_file"
+        # Append each transcript to the count_mapped_reads_to_Gene
+        for transcript in "${transcripts[@]}"; do
+            count_mapped_reads_to_Gene+=" $transcript"
+        done
+
+        # Run the command
+        gcount=$(eval "$count_mapped_reads_to_Gene")
+        # Convert gcount to an integer
+        gcount_int=$(echo "$gcount" | awk '{print int($0)}')
+
+        # Add gcount_int to the sum
+        sum=$((sum + gcount_int))
+		
+    done
+	echo "$sum"
+}
 
 while true; do
 
@@ -44,44 +92,49 @@ while true; do
     if ls "$SHARED_FOLDER/mapped_dir/singlefastq_bam_bai"/index_*.bam >/dev/null 2>&1; then
     for bam_file in "$SHARED_FOLDER/mapped_dir/singlefastq_bam_bai"/index_*.bam
         do
-        	# Path to the BAM file
-        	#bam_file=$SHARED_FOLDER"/mapped_dir/singlefastq_bam_bai/aligned_RUN_NAME.bam"
-        	# Path to the file containing the list of transcripts
-        	transcript_file="$Reference_Target/$transcriptsNames.txt"
-        	# Read the list of transcripts into an array
-        	transcripts=($(cat "$transcript_file"))
-        	# Build the samtools view count_mapped_reads_to_Gene
-        	count_mapped_reads_to_Gene="samtools view -c -F 0x4 $bam_file"
-        	# Append each transcript to the count_mapped_reads_to_Gene
-        	gcount=""
-        	for transcript in "${transcripts[@]}"; do
-            	count_mapped_reads_to_Gene+=" $transcript"
-        	done
+			function print_gensums() {
+			    local i=$1
+			    local transcriptsNames=$2
+			    local sum=$3
 
-        	# Run the command
-        	# eval "$count_mapped_reads_to_Gene"
-        	gcount=$(eval "$count_mapped_reads_to_Gene")
-        	# Convert gcount to an integer
-        	gcount_int=$(echo "$gcount" | awk '{print int($0)}')
+			    if [ "$sum" -le $n_irr_threshold ]; then
 
-	    	# Add gcount_int to the sum
-        	sum=$((sum + gcount_int))
+					echo -ne "\n\n\n\n\n\033[0K\rNothing interesting for $transcriptsNames. Yet.... (GeneCount < 40 : n = $sum)" | tee -a $SHARED_FOLDER/logfile_genecounts_$(date +%F).log
+			    else
+
+					echo -ne "\n\n\n\n\n\033[2K\rGotcha $transcriptsNames!!! (GeneCount > 40 : n = $sum)" | tee -a $SHARED_FOLDER/logfile_genecounts_$(date +%F).log
+			    fi
+                #tput sc
+			    tput cup $(($(tput lines) - i)) 0 # start i = 4(genenames amount) + 1
+				#tput rc
+			 }
 			
-			# Check the gcount sum condition 
-			if [ "$sum" -le $n_irr_threshold ]; then
-			    #echo -ne $(echo -ne "\033[2K\rNothing interesting. Yet.... (GeneCount < 40 : n = $sum)" | sed 's/\x1B\[[0-9;]*[JKmsu]//g') | tee -a "$1"/logfile_genecounts_$(date +%F).log
-				echo -ne "\033[0K\rNothing interesting for "$2". Yet.... (GeneCount < 40 : n = $sum)" | tee -a "$1"/logfile_genecounts_$(date +%F).log
-				#echo -ne "Nothing interesting for "$2". Yet.... (GeneCount < 40 : n = $sum)"\\r | tee -a "$1"/logfile_genecounts_$(date +%F).log
-				
-			else 
-			    #echo -ne $(echo -ne "\033[2K\rGotcha!!! (GeneCount > 40 : n = $sum)" | sed 's/\x1B\[[0-9;]*[JKmsu]//g') | tee -a "$1"/logfile_genecounts_$(date +%F).log
-				echo -ne "\033[2K\rGotcha "$2"!!! (GeneCount > 40 : n = $sum)" | tee -a "$1"/logfile_genecounts_$(date +%F).log
-				#echo -ne "Gotcha "$2" !!! (GeneCount > 40 : n = $sum)"\\r | tee -a "$1"/logfile_genecounts_$(date +%F).log
-				
-			fi
-			tput sc
-            tput cup $(($(tput lines) - 1)) $(($(tput cols) - 1))
-            tput rc
+            # Call the function for gene sum of the transcript files transcriptsNames1 
+            sum1=$(process_files "$Reference_Target/$transcriptsNames1.txt" "$sum1" &) 
+			
+            # Call the function for gene sum of the transcript files transcriptsNames2  
+			sum2=$(process_files "$Reference_Target/$transcriptsNames2.txt" "$sum2" &) 
+            
+			# Call the function for gene sum of the transcript files transcriptsNames3 
+            sum3=$(process_files "$Reference_Target/$transcriptsNames3.txt" "$sum3" &) 
+			 
+            # Call the function for gene sum of the transcript files transcriptsNames4  
+			sum4=$(process_files "$Reference_Target/$transcriptsNames4.txt" "$sum4" &)
+		    
+			# Call the function for gene sum of the transcript files transcriptsNames5 
+            sum5=$(process_files "$Reference_Target/$transcriptsNames5.txt" "$sum5" &) 
+			 
+            # Call the function for gene sum of the transcript files transcriptsNames6  
+			sum6=$(process_files "$Reference_Target/$transcriptsNames6.txt" "$sum6" &)
+			
+			wait
+			print_gensums 11 "$transcriptsNames1" "$sum1" 
+			print_gensums 10 "$transcriptsNames2" "$sum2"
+			print_gensums 9 "$transcriptsNames3" "$sum3"
+            print_gensums 8 "$transcriptsNames4" "$sum4"
+			print_gensums 7 "$transcriptsNames5" "$sum5"
+			print_gensums 6 "$transcriptsNames6" "$sum6"
+         
 			mv "$SHARED_FOLDER/mapped_dir/singlefastq_bam_bai"/index_*.bam "$SHARED_FOLDER/mapped_dir/bam_saved/"
             
     done
@@ -92,6 +145,7 @@ done &
 sleep $mapp_time
 
 tput cup $(($(tput lines) - 1)) $(($(tput cols) - 1))
+echo -ne "\n"
 
 sudo service minknow stop
 sleep 30
