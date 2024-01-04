@@ -148,8 +148,12 @@ tput cup $(($(tput lines) - 1)) $(($(tput cols) - 1))
 echo -ne "\n"
 
 sudo service minknow stop
+#sudo systemctl stop minknow
 sleep 30
+
 sudo service doradod stop
+#sudo systemctl stop doradod
+
 sleep 5
 kill %2
 kill %1
