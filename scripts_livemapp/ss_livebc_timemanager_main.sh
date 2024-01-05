@@ -8,7 +8,7 @@
 #                          csv_to_txt_convert ... "transcriptsNames4", ..., ...
 #                          sum4=$(process_files "$Reference_Target/$transcriptsNames4.txt" "$sum4")
 #                          print_gensums 4 "$transcriptsNames4" "$sum4"
-# Change the times of \n:   echo -ne "\n\n\n\033[0K\rNothing interesting for $transcriptsNames.
+# Change the times of \n:   echo -ne "\n\n\n\033[2K\rNothing interesting for $transcriptsNames.
 #################### GeneNames_N - 1 = echo -ne "\n\n\n\...
 #################### GeneNames_N = last print_gensums N (for the upper N=counts(n\)+N) is 3+4 or 5+6
 
@@ -99,7 +99,7 @@ while true; do
 
 			    if [ "$sum" -le $n_irr_threshold ]; then
 
-					echo -ne "\n\n\n\n\n\033[0K\rNothing interesting for $transcriptsNames. Yet.... (GeneCount < 40 : n = $sum)" | tee -a $SHARED_FOLDER/logfile_genecounts_$(date +%F).log
+					echo -ne "\n\n\n\n\n\033[2K\rNothing interesting for $transcriptsNames. Yet.... (GeneCount < 40 : n = $sum)" | tee -a $SHARED_FOLDER/logfile_genecounts_$(date +%F).log
 			    else
 
 					echo -ne "\n\n\n\n\n\033[2K\rGotcha $transcriptsNames!!! (GeneCount > 40 : n = $sum)" | tee -a $SHARED_FOLDER/logfile_genecounts_$(date +%F).log
