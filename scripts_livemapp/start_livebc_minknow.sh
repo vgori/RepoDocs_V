@@ -8,14 +8,16 @@
 sampleid="$1"
 expergroup="$2"
 
-# sudo systemctl start minknow
+sudo systemctl start minknow
 # sudo service minknow start
+sleep 60
 
 python /opt/ont/minknow/ont-python/lib/python3.10/site-packages/minknow_api/examples/start_protocol.py \
 --host localhost --position MN32167 \
 --sample-id "$sampleid" --experiment-group "$expergroup" \
 --experiment-duration 2 \
 --kit SQK-PCS111 \
---basecalling \ 
---basecall-config dna_r9.4.1_450bps_hac.cfg \ 
---fastq
+--basecalling \
+--basecall-config "dna_r9.4.1_450bps_hac.cfg" \
+--fastq \
+--fastq-reads-per-file 20

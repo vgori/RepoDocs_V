@@ -3,6 +3,8 @@
 # sed -i -e 's/\r$//' ss_livebc_mapping.sh
 
 # $SHARED_FOLDER is a /media/localarchive/ONT-data/real-time-tests/test_A
+# Processing the fastq.gz files: path_to_fastq_pass/*.fastq*
+
 # Open file descriptor 3 for writing to the log file
 exec >> "$1"/logfile_mapping_$(date +%F).log 2>&1
 
@@ -27,11 +29,11 @@ k=0
             if [ "$file_count" -ge 2 ]
             then
                 
-                cp $(ls -1A $path_to_fastq_pass/*.fastq | head -2) $SHARED_FOLDER/mapped_dir/fastq_pass_saved
-				mv $(ls -1A $path_to_fastq_pass/*.fastq | head -2) $SHARED_FOLDER/mapped_dir/bc_fastq_pass_tmp
+                cp $(ls -1A $path_to_fastq_pass/*.fastq* | head -2) $SHARED_FOLDER/mapped_dir/fastq_pass_saved
+				mv $(ls -1A $path_to_fastq_pass/*.fastq* | head -2) $SHARED_FOLDER/mapped_dir/bc_fastq_pass_tmp
                 
             
-				cat $SHARED_FOLDER/mapped_dir/bc_fastq_pass_tmp/*.fastq > $SHARED_FOLDER/mapped_dir/singlefastq_bam_bai/fastq_single_RUN_NAME_$k.fastq
+				cat $SHARED_FOLDER/mapped_dir/bc_fastq_pass_tmp/*.fastq* > $SHARED_FOLDER/mapped_dir/singlefastq_bam_bai/fastq_single_RUN_NAME_$k.fastq
 				# Run minimap2	
         	    minimap2 -ax splice -uf -k14 $Reference_Genome/Homo_sapiens.GRCh38.cdna.all.fa \
                 $SHARED_FOLDER/mapped_dir/singlefastq_bam_bai/fastq_single_RUN_NAME_$k.fastq | samtools sort \
@@ -48,7 +50,7 @@ k=0
 				
 				k=$((k+1))
 				sum_k=$((sum_k+k))
-				rm $SHARED_FOLDER/mapped_dir/bc_fastq_pass_tmp/*.fastq --recursive
+				rm $SHARED_FOLDER/mapped_dir/bc_fastq_pass_tmp/*.fastq* --recursive
             else
 				# waiting till the completely 2 fastq files in folder will be exist
 				sleep 10

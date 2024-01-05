@@ -1,5 +1,5 @@
 #!/bin/bash
-# chmod +x livebc_timemanager_main.sh
+# chmod +x ss_livebc_timemanager_main.sh
 #  sed -i -e 's/\r$//' ss_livebc_timemanager_main.sh
 # ./ss_livebc_timemanager_main.sh /media/localarchive/ONT-data/real-time-tests/test_A transcripts_FDXR transcripts_DDB2 transcripts_BAX transcripts_PHPT1 transcripts_PUM1 transcripts_HPRT1
 
@@ -15,7 +15,7 @@
 
 
 SHARED_FOLDER="$1"
-transcriptsNames="$2"
+transcriptsNames1="$2"
 transcriptsNames2="$3"
 transcriptsNames3="$4"
 transcriptsNames4="$5"
@@ -45,7 +45,7 @@ while [ -z "$path_to_fastq_pass" 2>/dev/null ]; do
 done
 
 # echo -e "Pass to fsatq_pass:  $path_to_fastq_pass "
-~/scripts_livemapp/livebc_mapping.sh $SHARED_FOLDER $path_to_fastq_pass &
+~/scripts_livemapp/ss_livebc_mapping.sh $SHARED_FOLDER $path_to_fastq_pass &
 
 # Wait until files appear in the mapped_dirfolder
 while [ ! "$(ls -A $SHARED_FOLDER/mapped_dir/singlefastq_bam_bai 2>/dev/null)" ]; do
@@ -147,14 +147,16 @@ sleep $mapp_time
 tput cup $(($(tput lines) - 1)) $(($(tput cols) - 1))
 echo -ne "\n"
 
-sudo service minknow stop
-#sudo systemctl stop minknow
+#sudo service minknow stop
+sudo systemctl stop minknow
 sleep 30
 
-sudo service doradod stop
-#sudo systemctl stop doradod
+#sudo service doradod stop
+sudo systemctl stop doradod
 
 sleep 5
 kill %2
 kill %1
 
+# terminate the ss_livebc_timemanager_main.sh after it has completed its execution
+exit
