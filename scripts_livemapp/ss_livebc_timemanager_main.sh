@@ -105,65 +105,7 @@ function csv_to_txt_convert() {
 	    tail -n +2 "$Reference_Target/$genename_f.csv" > "$Reference_Target/$genename_f.txt"
 	done
 }
-# csv_to_txt_convert "$transcriptsNames1" "$transcriptsNames2" "$transcriptsNames3" "$transcriptsNames4" "$transcriptsNames5" "$transcriptsNames6" "$transcriptsNames7" "$transcriptsNames8" "$transcriptsNames9" "$transcriptsNames10" "$transcriptsNames11" "$transcriptsNames12" "$transcriptsNames13" "$transcriptsNames14" "$transcriptsNames15" "$transcriptsNames16" "$transcriptsNames17" "$transcriptsNames18" "$transcriptsNames19" "$transcriptsNames20" "$transcriptsNames21" "$transcriptsNames22" "$transcriptsNames23" "$transcriptsNames24" "$transcriptsNames25" "$transcriptsNames26" "$transcriptsNames27" "$transcriptsNames28" "$transcriptsNames29" "$transcriptsNames30" "$transcriptsNames31" "$transcriptsNames32" "$transcriptsNames33" "$transcriptsNames34" "$transcriptsNames35" "$transcriptsNames36" "$transcriptsNames37" "$transcriptsNames38" "$transcriptsNames39" "$transcriptsNames40" "$transcriptsNames41" "$transcriptsNames42" "$transcriptsNames43" "$transcriptsNames44" "$transcriptsNames45" "$transcriptsNames46" "$transcriptsNames47" "$transcriptsNames48" "$transcriptsNames49" "$transcriptsNames50" "$transcriptsNames51" "$transcriptsNames52" "$transcriptsNames53" "$transcriptsNames54"
-
-# Call the function in parallel for each variable
-csv_to_txt_convert "$transcriptsNames1" &
-csv_to_txt_convert "$transcriptsNames2" &
-csv_to_txt_convert "$transcriptsNames3" &
-csv_to_txt_convert "$transcriptsNames4" &
-csv_to_txt_convert "$transcriptsNames5" &
-csv_to_txt_convert "$transcriptsNames6" &
-csv_to_txt_convert "$transcriptsNames7" &
-csv_to_txt_convert "$transcriptsNames8" &
-csv_to_txt_convert "$transcriptsNames9" &
-csv_to_txt_convert "$transcriptsNames10" &
-csv_to_txt_convert "$transcriptsNames11" &
-csv_to_txt_convert "$transcriptsNames12" &
-csv_to_txt_convert "$transcriptsNames13" &
-csv_to_txt_convert "$transcriptsNames14" &
-csv_to_txt_convert "$transcriptsNames15" &
-csv_to_txt_convert "$transcriptsNames16" &
-csv_to_txt_convert "$transcriptsNames17" &
-csv_to_txt_convert "$transcriptsNames18" &
-csv_to_txt_convert "$transcriptsNames19" &
-csv_to_txt_convert "$transcriptsNames20" &
-csv_to_txt_convert "$transcriptsNames21" &
-csv_to_txt_convert "$transcriptsNames22" &
-csv_to_txt_convert "$transcriptsNames23" &
-csv_to_txt_convert "$transcriptsNames24" &
-csv_to_txt_convert "$transcriptsNames25" &
-csv_to_txt_convert "$transcriptsNames26" &
-csv_to_txt_convert "$transcriptsNames27" &
-csv_to_txt_convert "$transcriptsNames28" &
-csv_to_txt_convert "$transcriptsNames29" &
-csv_to_txt_convert "$transcriptsNames30" &
-csv_to_txt_convert "$transcriptsNames31" &
-csv_to_txt_convert "$transcriptsNames32" &
-csv_to_txt_convert "$transcriptsNames33" &
-csv_to_txt_convert "$transcriptsNames34" &
-csv_to_txt_convert "$transcriptsNames35" &
-csv_to_txt_convert "$transcriptsNames36" &
-csv_to_txt_convert "$transcriptsNames37" &
-csv_to_txt_convert "$transcriptsNames38" &
-csv_to_txt_convert "$transcriptsNames39" &
-csv_to_txt_convert "$transcriptsNames40" &
-csv_to_txt_convert "$transcriptsNames41" &
-csv_to_txt_convert "$transcriptsNames42" &
-csv_to_txt_convert "$transcriptsNames43" &
-csv_to_txt_convert "$transcriptsNames44" &
-csv_to_txt_convert "$transcriptsNames45" &
-csv_to_txt_convert "$transcriptsNames46" &
-csv_to_txt_convert "$transcriptsNames47" &
-csv_to_txt_convert "$transcriptsNames48" &
-csv_to_txt_convert "$transcriptsNames49" &
-csv_to_txt_convert "$transcriptsNames50" &
-csv_to_txt_convert "$transcriptsNames51" &
-csv_to_txt_convert "$transcriptsNames52" &
-csv_to_txt_convert "$transcriptsNames53" &
-csv_to_txt_convert "$transcriptsNames54" &
-# Wait for all functions to complete
-wait
+csv_to_txt_convert "$transcriptsNames1" "$transcriptsNames2" "$transcriptsNames3" "$transcriptsNames4" "$transcriptsNames5" "$transcriptsNames6" "$transcriptsNames7" "$transcriptsNames8" "$transcriptsNames9" "$transcriptsNames10" "$transcriptsNames11" "$transcriptsNames12" "$transcriptsNames13" "$transcriptsNames14" "$transcriptsNames15" "$transcriptsNames16" "$transcriptsNames17" "$transcriptsNames18" "$transcriptsNames19" "$transcriptsNames20" "$transcriptsNames21" "$transcriptsNames22" "$transcriptsNames23" "$transcriptsNames24" "$transcriptsNames25" "$transcriptsNames26" "$transcriptsNames27" "$transcriptsNames28" "$transcriptsNames29" "$transcriptsNames30" "$transcriptsNames31" "$transcriptsNames32" "$transcriptsNames33" "$transcriptsNames34" "$transcriptsNames35" "$transcriptsNames36" "$transcriptsNames37" "$transcriptsNames38" "$transcriptsNames39" "$transcriptsNames40" "$transcriptsNames41" "$transcriptsNames42" "$transcriptsNames43" "$transcriptsNames44" "$transcriptsNames45" "$transcriptsNames46" "$transcriptsNames47" "$transcriptsNames48" "$transcriptsNames49" "$transcriptsNames50" "$transcriptsNames51" "$transcriptsNames52" "$transcriptsNames53" "$transcriptsNames54"
 
 mkdir $SHARED_FOLDER/mapped_dir/bam_saved
 
