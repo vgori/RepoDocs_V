@@ -204,9 +204,9 @@ while true; do
 			    local sum=$3
 
 			    if [ "$sum" -le $n_irr_threshold ]; then
-                    echo -ne "\rNothing interesting for $transcriptsNames. Yet.... (GeneCount < 40 : n = $sum)" | tee -a $SHARED_FOLDER/logfile_genecounts_$(date +%F).log
+                    echo -ne "\rNothing interesting for $transcriptsNames. Yet.... (GeneCount < 12 : n = $sum)" | tee -a $SHARED_FOLDER/logfile_genecounts_$(date +%F).log
 			    else
-				    echo -ne "\rGotcha $transcriptsNames!!! (GeneCount > 40 : n = $sum)" | tee -a $SHARED_FOLDER/logfile_genecounts_$(date +%F).log
+				    echo -ne "\rGotcha $transcriptsNames!!! (GeneCount > 12 : n = $sum)" | tee -a $SHARED_FOLDER/logfile_genecounts_$(date +%F).log
 				fi
 
 			    #tput cup $(($(tput lines) - i)) 0 # start i = 4(genenames amount) + 1
