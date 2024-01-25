@@ -1,8 +1,7 @@
 #!/bin/bash
 # chmod +x ss_livebc_timemanager_main.sh
 #  sed -i -e 's/\r$//' ss_livebc_timemanager_main.sh
-# ./ss_livebc_timemanager_main.sh /media/localarchive/ONT-data/real-time-tests/test_A transcripts_AEN transcripts_APOBEC3H transcripts_ASTN2 transcripts_BAX transcripts_BBC3 transcripts_BLOC1S2 transcripts_CCNG1 transcripts_CCR4 transcripts_CD70 transcripts_CDKN1A transcripts_CTSO transcripts_DDB2 transcripts_DOK7 transcripts_DUSP3 transcripts_EDA2R transcripts_FBXW2 transcripts_FDXR transcripts_GADD45A transcripts_GDF15 transcripts_GRM2 transcripts_GZMA transcripts_HPRT1 transcripts_IGFBP5 transcripts_IGLV1-44 transcripts_MAMDC4 transcripts_MDM2 transcripts_MLH1 transcripts_MYC transcripts_NKG7 transcripts_NovelPseudogene_ENSG00000283234 transcripts_PCNA transcripts_PF4 transcripts_PHPT1 transcripts_POLH transcripts_POU2AF1 transcripts_PPM1D transcripts_PRRX1 transcripts_PTP4A1_Pseudogene_ENSG00000278275 transcripts_RAD23A transcripts_RAD51 transcripts_RBM15 transcripts_RBM3 transcripts_RPL23AP42 transcripts_RPS19P1 transcripts_RPS27 transcripts_SESN1 transcripts_SOD1 transcripts_SPATA18 transcripts_TNFRSF10B transcripts_TNFSF4 transcripts_VWCE transcripts_XPC transcripts_ZMAT3 transcripts_WNT3_ENSG00000108379
-
+# ./ss_livebc_timemanager_main.sh test_A 
 # For more gene names add: transcriptsNames4="$5"..., 
 #                          csv_to_txt_convert ... "transcriptsNames4", ..., ...
 #                          sum4=$(process_files "$Reference_Target/$transcriptsNames4.txt" "$sum4")
@@ -13,61 +12,7 @@
 
 
 
-SHARED_FOLDER="$1"
-transcriptsNames1="$2"
-transcriptsNames2="$3"
-transcriptsNames3="$4"
-transcriptsNames4="$5"
-transcriptsNames5="$6"
-transcriptsNames6="$7"
-transcriptsNames7="$8"
-transcriptsNames8="$9"
-transcriptsNames9="${10}"
-transcriptsNames10="${11}"
-transcriptsNames11="${12}"
-transcriptsNames12="${13}"
-transcriptsNames13="${14}"
-transcriptsNames14="${15}"
-transcriptsNames15="${16}"
-transcriptsNames16="${17}"
-transcriptsNames17="${18}"
-transcriptsNames18="${19}"
-transcriptsNames19="${20}"
-transcriptsNames20="${21}"
-transcriptsNames21="${22}"
-transcriptsNames22="${23}"
-transcriptsNames23="${24}"
-transcriptsNames24="${25}"
-transcriptsNames25="${26}"
-transcriptsNames26="${27}"
-transcriptsNames27="${28}"
-transcriptsNames28="${29}"
-transcriptsNames29="${30}"
-transcriptsNames30="${31}"
-transcriptsNames31="${32}"
-transcriptsNames32="${33}"
-transcriptsNames33="${34}"
-transcriptsNames34="${35}"
-transcriptsNames35="${36}"
-transcriptsNames36="${37}"
-transcriptsNames37="${38}"
-transcriptsNames38="${39}"
-transcriptsNames39="${40}"
-transcriptsNames40="${41}"
-transcriptsNames41="${42}"
-transcriptsNames42="${43}"
-transcriptsNames43="${44}"
-transcriptsNames44="${45}"
-transcriptsNames45="${46}"
-transcriptsNames46="${47}"
-transcriptsNames47="${48}"
-transcriptsNames48="${49}"
-transcriptsNames49="${50}"
-transcriptsNames50="${51}"
-transcriptsNames51="${52}"
-transcriptsNames52="${53}"
-transcriptsNames53="${54}"
-transcriptsNames54="${55}"
+SHARED_FOLDER="/media/localarchive/ONT-data/real-time-tests"/"$1"
 shared_dirs="${SHARED_FOLDER%/}" 
 Reference_Target="/media/localarchive/transcriptome_ref/Target_GeneTranscripts"
 sample_id=$(basename "$SHARED_FOLDER") #test_A
@@ -76,6 +21,14 @@ parent_dir=$(dirname $(dirname "$SHARED_FOLDER")) # /media/localarchive/ONT-data
 t=1
 mapp_time=259200 # 72h =  259200s
 n_irr_threshold=12
+
+transcripts_inp=(transcripts_AEN transcripts_APOBEC3H transcripts_ASTN2 transcripts_BAX transcripts_BBC3 transcripts_BLOC1S2 transcripts_CCNG1 transcripts_CCR4 transcripts_CD70 transcripts_CDKN1A transcripts_CTSO transcripts_DDB2 transcripts_DOK7 transcripts_DUSP3 transcripts_EDA2R transcripts_FBXW2 transcripts_FDXR transcripts_GADD45A transcripts_GDF15 transcripts_GRM2 transcripts_GZMA transcripts_HPRT1 transcripts_IGFBP5 transcripts_IGLV1-44 transcripts_MAMDC4 transcripts_MDM2 transcripts_MLH1 transcripts_MYC transcripts_NKG7 transcripts_NovelPseudogene_ENSG00000283234 transcripts_PCNA transcripts_PF4 transcripts_PHPT1 transcripts_POLH transcripts_POU2AF1 transcripts_PPM1D transcripts_PRRX1 transcripts_PTP4A1_Pseudogene_ENSG00000278275 transcripts_RAD23A transcripts_RAD51 transcripts_RBM15 transcripts_RBM3 transcripts_RPL23AP42 transcripts_RPS19P1 transcripts_RPS27 transcripts_SESN1 transcripts_SOD1 transcripts_SPATA18 transcripts_TNFRSF10B transcripts_TNFSF4 transcripts_VWCE transcripts_XPC transcripts_ZMAT3 transcripts_WNT3_ENSG00000108379)
+
+# Define the number of transcripts_inp
+n_transcripts=${#transcripts_inp[@]}
+#echo -ne "$n_transcripts"
+# Define the sums array
+declare -a sums
 
 # "SHARED_FOLDER" is a "$1" entred script folder for outputs collection
 # Launch the scripts for simulaiting fastq generating
@@ -105,7 +58,7 @@ function csv_to_txt_convert() {
 	    tail -n +2 "$Reference_Target/$genename_f.csv" > "$Reference_Target/$genename_f.txt"
 	done
 }
-csv_to_txt_convert "$transcriptsNames1" "$transcriptsNames2" "$transcriptsNames3" "$transcriptsNames4" "$transcriptsNames5" "$transcriptsNames6" "$transcriptsNames7" "$transcriptsNames8" "$transcriptsNames9" "$transcriptsNames10" "$transcriptsNames11" "$transcriptsNames12" "$transcriptsNames13" "$transcriptsNames14" "$transcriptsNames15" "$transcriptsNames16" "$transcriptsNames17" "$transcriptsNames18" "$transcriptsNames19" "$transcriptsNames20" "$transcriptsNames21" "$transcriptsNames22" "$transcriptsNames23" "$transcriptsNames24" "$transcriptsNames25" "$transcriptsNames26" "$transcriptsNames27" "$transcriptsNames28" "$transcriptsNames29" "$transcriptsNames30" "$transcriptsNames31" "$transcriptsNames32" "$transcriptsNames33" "$transcriptsNames34" "$transcriptsNames35" "$transcriptsNames36" "$transcriptsNames37" "$transcriptsNames38" "$transcriptsNames39" "$transcriptsNames40" "$transcriptsNames41" "$transcriptsNames42" "$transcriptsNames43" "$transcriptsNames44" "$transcriptsNames45" "$transcriptsNames46" "$transcriptsNames47" "$transcriptsNames48" "$transcriptsNames49" "$transcriptsNames50" "$transcriptsNames51" "$transcriptsNames52" "$transcriptsNames53" "$transcriptsNames54"
+csv_to_txt_convert "${transcripts_inp[@]}"
 
 mkdir $SHARED_FOLDER/mapped_dir/bam_saved
 
@@ -133,6 +86,14 @@ function process_files() {
 	echo "$sum"
 }
 
+# Define the file name and path
+TSV_FILE="$SHARED_FOLDER/genecount_table.tsv"
+
+# Add the header row to the file if it does not exist
+if [ ! -f "$TSV_FILE" ]; then
+    echo -e "GeneName,CopyNumbers,CycleNumber" > "$TSV_FILE"
+fi
+
 ki=0
 while true; do
 
@@ -147,138 +108,30 @@ while true; do
 
 			    if [ "$sum" -le $n_irr_threshold ]; then
                     echo -ne "\rNothing interesting for $transcriptsNames. Yet.... (GeneCount < 12 : n = $sum)" | tee -a $SHARED_FOLDER/logfile_genecounts_$(date +%F).log
+					echo -e "$transcriptsNames,$sum,$((ki + 1))"  >> "$TSV_FILE"
 			    else
 				    echo -ne "\rGotcha $transcriptsNames!!! (GeneCount > 12 : n = $sum)" | tee -a $SHARED_FOLDER/logfile_genecounts_$(date +%F).log
+					echo -e "$transcriptsNames,$sum,$((ki + 1))"  >> "$TSV_FILE"
 				fi
 
-			    #tput cup $(($(tput lines) - i)) 0 # start i = 4(genenames amount) + 1
 				printf "\n%.0s" $(seq 1 $(($(tput lines) - i))) 
 
 			 }
 			
-            # Call the function for gene sum of the transcript files transcriptsNames1 
-            sum1=$(process_files "$Reference_Target/$transcriptsNames1.txt" "$sum1" &) 
-			
-            # Call the function for gene sum of the transcript files transcriptsNames2  
-			sum2=$(process_files "$Reference_Target/$transcriptsNames2.txt" "$sum2" &) 
-            
-			# Call the function for gene sum of the transcript files transcriptsNames3 
-            sum3=$(process_files "$Reference_Target/$transcriptsNames3.txt" "$sum3" &) 
-			 
-            # Call the function for gene sum of the transcript files transcriptsNames4  
-			sum4=$(process_files "$Reference_Target/$transcriptsNames4.txt" "$sum4" &)
-		    
-			# Call the function for gene sum of the transcript files transcriptsNames5 
-            sum5=$(process_files "$Reference_Target/$transcriptsNames5.txt" "$sum5" &) 
-			 
-            # Call the function for gene sum of the transcript files transcriptsNames6  
-			sum6=$(process_files "$Reference_Target/$transcriptsNames6.txt" "$sum6" &)
-			sum7=$(process_files "$Reference_Target/$transcriptsNames7.txt" "$sum7" &)
-			sum8=$(process_files "$Reference_Target/$transcriptsNames8.txt" "$sum8" &)
-			sum9=$(process_files "$Reference_Target/$transcriptsNames9.txt" "$sum9" &) 
-			sum10=$(process_files "$Reference_Target/$transcriptsNames10.txt" "$sum10" &)
-			sum11=$(process_files "$Reference_Target/$transcriptsNames11.txt" "$sum11" &)
-			sum12=$(process_files "$Reference_Target/$transcriptsNames12.txt" "$sum12" &)
-			sum13=$(process_files "$Reference_Target/$transcriptsNames13.txt" "$sum13" &)
-			sum14=$(process_files "$Reference_Target/$transcriptsNames14.txt" "$sum14" &)
-			sum15=$(process_files "$Reference_Target/$transcriptsNames15.txt" "$sum15" &)
-			sum16=$(process_files "$Reference_Target/$transcriptsNames16.txt" "$sum16" &)
-			sum17=$(process_files "$Reference_Target/$transcriptsNames17.txt" "$sum17" &)
-			sum18=$(process_files "$Reference_Target/$transcriptsNames18.txt" "$sum18" &)
-			sum19=$(process_files "$Reference_Target/$transcriptsNames19.txt" "$sum19" &)
-			sum20=$(process_files "$Reference_Target/$transcriptsNames20.txt" "$sum20" &)
-			sum21=$(process_files "$Reference_Target/$transcriptsNames21.txt" "$sum21" &)
-			sum22=$(process_files "$Reference_Target/$transcriptsNames22.txt" "$sum22" &)
-			sum23=$(process_files "$Reference_Target/$transcriptsNames23.txt" "$sum23" &)
-			sum24=$(process_files "$Reference_Target/$transcriptsNames24.txt" "$sum24" &)
-			sum25=$(process_files "$Reference_Target/$transcriptsNames25.txt" "$sum25" &)
-			sum26=$(process_files "$Reference_Target/$transcriptsNames26.txt" "$sum26" &)
-			sum27=$(process_files "$Reference_Target/$transcriptsNames27.txt" "$sum27" &)
-			sum28=$(process_files "$Reference_Target/$transcriptsNames28.txt" "$sum28" &)
-			sum29=$(process_files "$Reference_Target/$transcriptsNames29.txt" "$sum29" &)
-			sum30=$(process_files "$Reference_Target/$transcriptsNames30.txt" "$sum30" &)
-			sum31=$(process_files "$Reference_Target/$transcriptsNames31.txt" "$sum31" &)
-			sum32=$(process_files "$Reference_Target/$transcriptsNames32.txt" "$sum32" &)
-			sum33=$(process_files "$Reference_Target/$transcriptsNames33.txt" "$sum33" &)
-			sum34=$(process_files "$Reference_Target/$transcriptsNames34.txt" "$sum34" &)
-			sum35=$(process_files "$Reference_Target/$transcriptsNames35.txt" "$sum35" &)
-			sum36=$(process_files "$Reference_Target/$transcriptsNames36.txt" "$sum36" &)
-			sum37=$(process_files "$Reference_Target/$transcriptsNames37.txt" "$sum37" &)
-			sum38=$(process_files "$Reference_Target/$transcriptsNames38.txt" "$sum38" &)
-			sum39=$(process_files "$Reference_Target/$transcriptsNames39.txt" "$sum39" &)
-			sum40=$(process_files "$Reference_Target/$transcriptsNames40.txt" "$sum40" &)
-			sum41=$(process_files "$Reference_Target/$transcriptsNames41.txt" "$sum41" &)
-			sum42=$(process_files "$Reference_Target/$transcriptsNames42.txt" "$sum42" &)
-			sum43=$(process_files "$Reference_Target/$transcriptsNames43.txt" "$sum43" &)
-			sum44=$(process_files "$Reference_Target/$transcriptsNames44.txt" "$sum44" &)
-			sum45=$(process_files "$Reference_Target/$transcriptsNames45.txt" "$sum45" &)
-			sum46=$(process_files "$Reference_Target/$transcriptsNames46.txt" "$sum46" &)
-			sum47=$(process_files "$Reference_Target/$transcriptsNames47.txt" "$sum47" &)
-			sum48=$(process_files "$Reference_Target/$transcriptsNames48.txt" "$sum48" &)
-			sum49=$(process_files "$Reference_Target/$transcriptsNames49.txt" "$sum49" &)
-			sum50=$(process_files "$Reference_Target/$transcriptsNames50.txt" "$sum50" &)
-			sum51=$(process_files "$Reference_Target/$transcriptsNames51.txt" "$sum51" &)
-			sum52=$(process_files "$Reference_Target/$transcriptsNames52.txt" "$sum52" &)
-			sum53=$(process_files "$Reference_Target/$transcriptsNames53.txt" "$sum53" &)
-			sum54=$(process_files "$Reference_Target/$transcriptsNames54.txt" "$sum54" &)
+            # Loop through the transcripts_inp and call the process_files function for each transcript file
+            for i in $(seq 0 $((n_transcripts - 1))); do
+               sums[$i]=$(process_files "$Reference_Target/${transcripts_inp[$i]}.txt" "${sums[$i]}" &)
+            done
 
-			wait
-			clear
-			print_gensums 107 "$transcriptsNames1" "$sum1"
-			print_gensums 106 "$transcriptsNames2" "$sum2"
-			print_gensums 105 "$transcriptsNames3" "$sum3"
-			print_gensums 104 "$transcriptsNames4" "$sum4"
-			print_gensums 103 "$transcriptsNames5" "$sum5"
-			print_gensums 102 "$transcriptsNames6" "$sum6"
-			print_gensums 101 "$transcriptsNames7" "$sum7"
-			print_gensums 100 "$transcriptsNames8" "$sum8"
-			print_gensums 99 "$transcriptsNames9" "$sum9"
-			print_gensums 98 "$transcriptsNames10" "$sum10"
-			print_gensums 97 "$transcriptsNames11" "$sum11"
-			print_gensums 96 "$transcriptsNames12" "$sum12"
-			print_gensums 95 "$transcriptsNames13" "$sum13"
-			print_gensums 94 "$transcriptsNames14" "$sum14"
-			print_gensums 93 "$transcriptsNames15" "$sum15"
-			print_gensums 92 "$transcriptsNames16" "$sum16"
-			print_gensums 91 "$transcriptsNames17" "$sum17"
-			print_gensums 90 "$transcriptsNames18" "$sum18"
-			print_gensums 89 "$transcriptsNames19" "$sum19"
-			print_gensums 88 "$transcriptsNames20" "$sum20"
-			print_gensums 87 "$transcriptsNames21" "$sum21"
-			print_gensums 86 "$transcriptsNames22" "$sum22"
-			print_gensums 85 "$transcriptsNames23" "$sum23"
-			print_gensums 84 "$transcriptsNames24" "$sum24"
-			print_gensums 83 "$transcriptsNames25" "$sum25"
-			print_gensums 82 "$transcriptsNames26" "$sum26"
-			print_gensums 81 "$transcriptsNames27" "$sum27"
-			print_gensums 80 "$transcriptsNames28" "$sum28"
-			print_gensums 79 "$transcriptsNames29" "$sum29"
-			print_gensums 78 "$transcriptsNames30" "$sum30"
-			print_gensums 77 "$transcriptsNames31" "$sum31"
-			print_gensums 76 "$transcriptsNames32" "$sum32"
-			print_gensums 75 "$transcriptsNames33" "$sum33"
-			print_gensums 74 "$transcriptsNames34" "$sum34"
-			print_gensums 73 "$transcriptsNames35" "$sum35"
-			print_gensums 72 "$transcriptsNames36" "$sum36"
-			print_gensums 71 "$transcriptsNames37" "$sum37"
-			print_gensums 70 "$transcriptsNames38" "$sum38"
-			print_gensums 69 "$transcriptsNames39" "$sum39"
-			print_gensums 68 "$transcriptsNames40" "$sum40"
-			print_gensums 67 "$transcriptsNames41" "$sum41"
-			print_gensums 66 "$transcriptsNames42" "$sum42"
-			print_gensums 65 "$transcriptsNames43" "$sum43"
-			print_gensums 64 "$transcriptsNames44" "$sum44"
-			print_gensums 63 "$transcriptsNames45" "$sum45"
-			print_gensums 62 "$transcriptsNames46" "$sum46"
-			print_gensums 61 "$transcriptsNames47" "$sum47"
-			print_gensums 60 "$transcriptsNames48" "$sum48"
-			print_gensums 59 "$transcriptsNames49" "$sum49"
-			print_gensums 58 "$transcriptsNames50" "$sum50"
-			print_gensums 57 "$transcriptsNames51" "$sum51"
-			print_gensums 56 "$transcriptsNames52" "$sum52"
-			print_gensums 55 "$transcriptsNames53" "$sum53"
-			print_gensums 54 "$transcriptsNames54" "$sum54"
+            # Wait for all the processes to finish
+            wait
 			
+            
+            clear
+			# Loop through the transcripts_inp and call the print_gensums function for each transcript file
+            for i in $(seq 0 $((n_transcripts - 1))); do
+                print_gensums $((n_transcripts + n_transcripts - i - 1)) "${transcripts_inp[$i]}" "${sums[$i]}"
+            done 
 			ki=$((ki+1))
             echo -ne "\n_____________________END of the "$ki" cycle___________________________________" | tee -a $SHARED_FOLDER/logfile_genecounts_$(date +%F).log
     
