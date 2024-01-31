@@ -155,6 +155,7 @@ sleep 30
 sudo systemctl stop doradod
 
 sleep 5
+kill %3
 kill %2
 kill %1
 
