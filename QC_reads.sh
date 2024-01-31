@@ -51,7 +51,7 @@ Reference_Genome="/media/localarchive/transcriptome_ref"
 
         echo -e "${BGreen} Launching minimap2 with splice -k14"
 		start_map=$(date +%s)
-        minimap2 -ax splice -uf -k14 $Reference_Genome/Homo_sapiens2.GRCh38.cdna.all.fa $basecalled_dirs/data_processing/single_fastq_$setname.fastq | samtools sort -T tmp -o $basecalled_dirs/data_processing/output_sorted_$setname.bam
+        minimap2 -ax splice -uf -k14 $Reference_Genome/Homo_sapiens.GRCh38.cdna.all.fa $basecalled_dirs/data_processing/single_fastq_$setname.fastq | samtools sort -T tmp -o $basecalled_dirs/data_processing/output_sorted_$setname.bam
         end_map=$(date +%s)
 		start_samindex=$(date +%s)
 		samtools index $basecalled_dirs/data_processing/output_sorted_$setname.bam
