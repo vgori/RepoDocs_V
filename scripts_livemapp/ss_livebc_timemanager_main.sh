@@ -136,6 +136,7 @@ while true; do
             echo -ne "\n_____________________END of the "$ki" cycle___________________________________" | tee -a $SHARED_FOLDER/logfile_genecounts_$(date +%F).log
     
 			mv "$SHARED_FOLDER/mapped_dir/singlefastq_bam_bai"/index_*.bam "$SHARED_FOLDER/mapped_dir/bam_saved/"
+			mv "$SHARED_FOLDER/mapped_dir/singlefastq_bam_bai"/index_*.bam.bai "$SHARED_FOLDER/mapped_dir/bam_saved/"
             
     done
 	fi
