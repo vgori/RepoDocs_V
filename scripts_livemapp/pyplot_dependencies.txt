@@ -1,0 +1,7 @@
+sudo apt-get install python3-matplotlib
+sudo apt-get install IPython
+pip install plotly 
+pip install pandas
+pip install numpy
+pip install watchdog
+pip install mplcursors
