@@ -4,10 +4,10 @@ exec >> "$1"/logfile_$(date +%F).log 2>&1
 
 # chmod +x Cutoff.sh
 # sed -i -e 's/\r$//' Cutoff.sh
-# ./Cutoff.sh /media/localarchive/m6A-project/m6A-DGE/arraystar 5 10 15 20 30 40 60 90
-# ./Cutoff.sh /media/localarchive/m6A-project/m6A-DGE/arraystar/control_0Gy_A 5 10 15 20 30 40 60 90 &\ 
-# ./Cutoff.sh /media/localarchive/m6A-project/m6A-DGE/arraystar/control_0Gy_B 5 10 15 20 30 40 60 90 &\ 
-# ./Cutoff.sh /media/localarchive/m6A-project/m6A-DGE/arraystar/control_0Gy_C 5 10 15 20 30 40 60 90 && fg
+# ./Cutoff.sh /media/localarchive/m6A-project/m6A-DGE/arraystar /media/localarchive/Cutoff_Output 5 10 15 20 30 40 60 90
+# ./Cutoff.sh /media/localarchive/m6A-project/m6A-DGE/arraystar/control_0Gy_A /media/localarchive/Cutoff_Output 5 10 15 20 30 40 60 90 &\ 
+# ./Cutoff.sh /media/localarchive/m6A-project/m6A-DGE/arraystar/control_0Gy_B /media/localarchive/Cutoff_Output 5 10 15 20 30 40 60 90 &\ 
+# ./Cutoff.sh /media/localarchive/m6A-project/m6A-DGE/arraystar/control_0Gy_C /media/localarchive/Cutoff_Output 5 10 15 20 30 40 60 90 && fg
 #PATH=/root/anaconda3/bin:$PATH # Check the path
 export HDF5_PLUGIN_PATH="/usr/local/hdf5/lib/plugin"
 
@@ -19,12 +19,10 @@ setname="${basecalled_dirs##*/}"
 path_to_fastq_pass=$(find $basecalled_dirs -name "pass" -type d)
 #path_to_fastq_pass=$(find $basecalled_dirs -name "fastq_pass" -type d)
 # DGE_cutoff="/data/Cutoff/Output/DGE_input"
-mkdir "/media/localarchive/Cutoff_Output/DGE_input"
-DGE_cutoff="/media/localarchive/Cutoff_Output/DGE_input"
+mkdir -p "$2" #"/media/localarchive/Cutoff_Output"
+DGE_cutoff="$2" #"/media/localarchive/Cutoff_Output"
 TimePoint_py="~/Calibration_curve"
-time_points=("${@:2}") # Capture all arguments starting from the second one (5 10 15 20 30 40 60 90)
-# Generate a random string of alphanumeric characters
-# Directory where the files are locateddirectory="/media/localarchive/m6A-P2S-Arraystar/Control-C/20231103_1517_P2S-00698-A_PAS67129_33201de9"
+time_points=("${@:3}") # Capture all arguments starting from the second one (5 10 15 20 30 40 60 90)
 
 # Iterate over each set basecalled_dirs
 
