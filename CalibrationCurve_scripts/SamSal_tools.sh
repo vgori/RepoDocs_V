@@ -18,9 +18,9 @@ mkdir -p $expanded_OUTPUT_FOLDER
 #wirite into log file all processes
 exec >> "$expanded_OUTPUT_FOLDER"/logfile_$(date +%F).log 2>&1
 sample_id=$(basename "$expanded_OUTPUT_FOLDER") #cut_Set1_0Gy_10
-Reference_Genome_cdna="/data/Reference_Genome_HomoSapiens/Homo_sapiens.GRCh38.cdna.all.fa"
-Reference_Target="/data/Reference_Genome_HomoSapiens/Target_GeneTranscripts"
-Reference_Folder="/data/Reference_Genome_HomoSapiens"
+Reference_Genome_cdna="/media/localarchive/transcriptome_ref/Homo_sapiens.GRCh38.cdna.all.fa"
+Reference_Target="/media/localarchive/transcriptome_ref/Target_GeneTranscripts"
+Reference_Folder="/media/localarchive/transcriptome_ref"
 # Expand the tildes to absolute paths using Python
 expanded_Reference_Genome_cdna=$(python -c "import os; print(os.path.expanduser('$Reference_Genome_cdna'))")
 expanded_Reference_Target=$(python -c "import os; print(os.path.expanduser('$Reference_Target'))")
