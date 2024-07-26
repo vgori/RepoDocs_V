@@ -99,9 +99,12 @@ else
 fi
 
 # Run minimap2	
+ 
     minimap2 -ax splice -uf -k14 -t $NUM_CPUS $expanded_Reference_Genome_cdna \
     $expanded_SHARED_FOLDER/output_Cutted_*.fastq | samtools sort \
 	-T tmp -o $expanded_OUTPUT_FOLDER/aligned_Cutted_$sample_id.bam
+	# Clean up temporary directory and files
+	rm -rf "$expanded_OUTPUT_FOLDER/tmp*.bam"
 # Run samtools				
 	echo -e "samtools indexing ... "
     samtools index -@ $NUM_CPUS $expanded_OUTPUT_FOLDER/aligned_Cutted_$sample_id.bam
