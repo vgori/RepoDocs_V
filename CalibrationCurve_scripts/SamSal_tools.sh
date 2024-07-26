@@ -82,16 +82,9 @@ if [ ! -f "$TSV_FILE" ]; then
     echo -e "GeneName,ReadCounts" > "$TSV_FILE"
 fi
 
-# chek if exist folder with bam file
+# chek if exist folder 
 if [[ -d "${expanded_OUTPUT_FOLDER}" ]]; then
-    # Check if there are any .bam files in the folder
-    bam_files=("$expanded_OUTPUT_FOLDER"/*.bam)
-    if [[ ${#bam_files[@]} -gt 0 ]]; then
-        echo "Processing .bam files in: ${expanded_OUTPUT_FOLDER}"
-	  else
-        echo "No .bam files found in: $expanded_OUTPUT_FOLDER"
-		exit 1
-    fi
+    echo "Output processing directory is: ${expanded_OUTPUT_FOLDER}"
 
 else
     echo "Error: Folder $expanded_OUTPUT_FOLDER does not exist."
@@ -102,9 +95,20 @@ fi
  
     minimap2 -ax splice -uf -k14 -t $NUM_CPUS $expanded_Reference_Genome_cdna \
     $expanded_SHARED_FOLDER/output_Cutted_*.fastq | samtools sort \
-	-T tmp -o $expanded_OUTPUT_FOLDER/aligned_Cutted_$sample_id.bam
+	-T "$expanded_OUTPUT_FOLDER"/tmp -o $expanded_OUTPUT_FOLDER/aligned_Cutted_$sample_id.bam
 	# Clean up temporary directory and files
-	rm -rf "$expanded_OUTPUT_FOLDER/tmp*.bam"
+	rm -rf "./tmp*.bam"
+
+# Check if there are any .bam files in the folder
+    bam_files=("$expanded_OUTPUT_FOLDER"/*.bam)
+    if [[ ${#bam_files[@]} -gt 0 ]]; then
+        echo "Processing .bam files in: ${expanded_OUTPUT_FOLDER}"
+	  else
+        echo "No .bam files found in: $expanded_OUTPUT_FOLDER"
+		exit 1
+    fi
+
+
 # Run samtools				
 	echo -e "samtools indexing ... "
     samtools index -@ $NUM_CPUS $expanded_OUTPUT_FOLDER/aligned_Cutted_$sample_id.bam
