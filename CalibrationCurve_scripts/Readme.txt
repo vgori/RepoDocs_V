@@ -55,6 +55,17 @@ Dependensied: sudo apt install csvkit
    
    # You can run simultaniously several sets for different cutoffs
    ./SamSal_tools.sh <Time_cutoff folder name> <name of cut set1> <Output folder for SamSaltools_cutoffs> & ./SamSal_tools.sh <Time_cutoff folder name> <name of cut set2> <Output folder for SamSaltools_cutoffs> && fg 
+./SamSal_tools.sh time_cutoff_10 cut_test-H48-2Gy-2_10 Сutoffs & ./SamSal_tools.sh time_cutoff_15 cut_test-H48-2Gy-2_15 Сutoffs && fg
+
+   # Run subsequently. it continues running the next command even if the previous one fails
+
+./SamSal_tools.sh time_cutoff_5 cut_test-H48-2Gy-2_5 Сutoffs \
+&& ./SamSal_tools.sh time_cutoff_10 cut_test-H48-2Gy-2_10 Сutoffs \
+&& ./SamSal_tools.sh time_cutoff_15 cut_test-H48-2Gy-2_15 Сutoffs \
+&& ./SamSal_tools.sh time_cutoff_30 cut_test-H48-2Gy-2_30 Сutoffs \
+&& ./SamSal_tools.sh time_cutoff_45 cut_test-H48-2Gy-2_45 Сutoffs \
+&& ./SamSal_tools.sh time_cutoff_60 cut_test-H48-2Gy-2_60 Сutoffs \
+&& ./SamSal_tools.sh time_cutoff_90 cut_test-H48-2Gy-2_90 Сutoffs || true
 
 
 
