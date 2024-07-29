@@ -2,15 +2,15 @@
 exec >> "$1"/logfile_$(date +%F).log 2>&1
 
 
-# chmod +x test_Cutoff.sh
-# sed -i -e 's/\r$//' test_Cutoff.sh
-# ./test_Cutoff.sh /data/Cutoff/Input/Sam-UK-Test/MK_05Gy-A Output_blood 5 10 15 20 30 40 60 90
-# ./test_Cutoff.sh /data/Cutoff/Input/Sam-UK-Test_awsS3/MK-05Gy-2 5 10 15 20 30 40 60 90 &\ 
-# ./test_Cutoff.sh /data/Cutoff/Input/Sam-UK-Test_awsS3/SJS_05Gy 5 10 15 20 30 40 60 90 &\ 
-# ./test_Cutoff.sh /data/Cutoff/Input/Sam-UK-Test_awsS3/SK-05Gy 5 10 15 20 30 40 60 90 && fg
+# chmod +x Cutoff_CORE.sh
+# sed -i -e 's/\r$//' Cutoff_CORE.sh
+# ./Cutoff_CORE.sh /media/localarchive/ONT-data/4th-calibration/H14-3Gy /media/localarchive/ONT-data/4th-calibration/Cutoffs 5 10 15 30 45 60 90 \
+# & ./Cutoff_CORE.sh /media/localarchive/ONT-data/4th-calibration/P1-4Gy /media/localarchive/ONT-data/4th-calibration/Cutoffs 5 10 15 30 45 60 90 \ 
+# & ./Cutoff_CORE.sh /media/localarchive/ONT-data/4th-calibration/P32-1Gy /media/localarchive/ONT-data/4th-calibration/Cutoffs 5 10 15 30 45 60 90 && fg
+ 
 #PATH=/root/anaconda3/bin:$PATH # Check the path
 export HDF5_PLUGIN_PATH="/usr/local/hdf5/lib/plugin"
-NUM_CPUS=30
+NUM_CPUS=20
 # Define the common folder path
 basecalled_dirs="$1" #"/path/to/common/folder/basecalled"  
 basecalled_dirs="${basecalled_dirs%/}" # remove trailing slash (if any)
@@ -18,8 +18,8 @@ setname="${basecalled_dirs##*/}"
 # -name "fastq_pass" or -name "pass"
 path_to_fastq_pass=$(find $basecalled_dirs -name "data_processing" -type d)
 
-mkdir -p "$2" #"/data/Cutoff/Output/DGE_input"
-Output_cutoff="$2" #"/data/Cutoff/Output/DGE_input"
+mkdir -p "$2" 
+Output_cutoff="$2" 
 
 time_points=("${@:3}") # Capture all arguments starting from the second one (5 10 15 20 30 40 60 90)
 

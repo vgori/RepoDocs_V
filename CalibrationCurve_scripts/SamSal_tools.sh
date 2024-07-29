@@ -2,17 +2,17 @@
 set -euo pipefail
 # chmod +x SamSal_tools.sh
 #  sed -i -e 's/\r$//' SamSal_tools.sh
-# ./SamSal_tools.sh <Time_cutoff folder name> <cut_Set1_0Gy_1> <Output_SamSaltools_cutoffs>
-# ./SamSal_tools.sh time_cutoff_10 cut_Set1_0Gy_10 Output_SamSaltools_cutoffs
+# ./SamSal_tools.sh <Time_cutoff folder name> <cut_Set1_0Gy_1> <samsal_output>
+# ./SamSal_tools.sh time_cutoff_10 cut_Set1_0Gy_10 samsal_output
 
 
 NUM_CPUS=30
-# input folder
-SHARED_FOLDER="/media/localarchive/Cutoffs"/"$1"/"$2"
+# input folder /media/localarchive/ONT-data/4th-calibration/Cutoffs
+SHARED_FOLDER="/media/localarchive/ONT-data/4th-calibration/Cutoffs"/"$1"/"$2"
 expanded_SHARED_FOLDER=$(python -c "import os; print(os.path.expanduser('$SHARED_FOLDER'))")
 transcripts_inp=(transcripts_AEN transcripts_APOBEC3H transcripts_ASTN2 transcripts_BAX transcripts_BBC3 transcripts_BLOC1S2 transcripts_CCNG1 transcripts_CCR4 transcripts_CD70 transcripts_CDKN1A transcripts_CTSO transcripts_DDB2 transcripts_DOK7 transcripts_DUSP3 transcripts_EDA2R transcripts_FBXW2 transcripts_FDXR transcripts_GADD45A transcripts_GDF15 transcripts_GRM2 transcripts_GZMA transcripts_HPRT1 transcripts_IGFBP5 transcripts_IGLV1-44 transcripts_MAMDC4 transcripts_MDM2 transcripts_MLH1 transcripts_MYC transcripts_NKG7 transcripts_NovelPseudogene_ENSG00000283234 transcripts_PCNA transcripts_PF4 transcripts_PHPT1 transcripts_POLH transcripts_POU2AF1 transcripts_PPM1D transcripts_PRRX1 transcripts_PTP4A1_Pseudogene_ENSG00000278275 transcripts_RAD23A transcripts_RAD51 transcripts_RBM15 transcripts_RBM3 transcripts_RPL23AP42 transcripts_RPS19P1 transcripts_RPS27 transcripts_SESN1 transcripts_SOD1 transcripts_SPATA18 transcripts_TNFRSF10B transcripts_TNFSF4 transcripts_VWCE transcripts_XPC transcripts_ZMAT3 transcripts_WNT3_ENSG00000108379)
 # output folder
-OUTPUT_FOLDER="/media/localarchive"/"$3"/"counts_$2"
+OUTPUT_FOLDER="/media/localarchive/ONT-data/4th-calibration"/"$3"/"counts_$2"
 expanded_OUTPUT_FOLDER=$(python -c "import os; print(os.path.expanduser('$OUTPUT_FOLDER'))")
 mkdir -p $expanded_OUTPUT_FOLDER
 #wirite into log file all processes
