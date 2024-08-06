@@ -61,8 +61,74 @@ Dependensied: sudo apt install csvkit
 & ./SamSal_tools.sh time_cutoff_15 cut_H14-05Gy_15 samsal_output && fg
 
    8.2 # Run subsequently. it continues running the next command even if the previous one fails
-       # Run for sets: "H14-05Gy" "H14-0Gy" "H14-1Gy" "H14-2Gy" "P1-05Gy" "P1-0Gy" "P1-1Gy" "P1-2Gy" "P1-3Gy" "P1-5Gy" "P32-01Gy" "P32-025Gy" "P32-05Gy" "P32-0Gy"
+       # Run for sets: "H14-0Gy" "P1-0Gy" "P32-0Gy" "H14-05Gy" "P1-05Gy" "P32-05Gy" "H14-1Gy" "P1-1Gy" "P32-1Gy-repeat"
 
+
+./SamSal_tools.sh time_cutoff_5 cut_H14-05Gy_5 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_10 cut_H14-05Gy_10 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_15 cut_H14-05Gy_15 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_30 cut_H14-05Gy_30 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_45 cut_H14-05Gy_45 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_60 cut_H14-05Gy_60 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_90 cut_H14-05Gy_90 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_5 cut_H14-0Gy_5 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_10 cut_H14-0Gy_10 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_15 cut_H14-0Gy_15 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_30 cut_H14-0Gy_30 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_45 cut_H14-0Gy_45 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_60 cut_H14-0Gy_60 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_90 cut_H14-0Gy_90 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_5 cut_H14-1Gy_5 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_10 cut_H14-1Gy_10 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_15 cut_H14-1Gy_15 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_30 cut_H14-1Gy_30 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_45 cut_H14-1Gy_45 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_60 cut_H14-1Gy_60 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_90 cut_H14-1Gy_90 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_5 cut_P1-05Gy_5 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_10 cut_P1-05Gy_10 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_15 cut_P1-05Gy_15 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_30 cut_P1-05Gy_30 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_45 cut_P1-05Gy_45 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_60 cut_P1-05Gy_60 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_90 cut_P1-05Gy_90 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_5 cut_P1-0Gy_5 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_10 cut_P1-0Gy_10 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_15 cut_P1-0Gy_15 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_30 cut_P1-0Gy_30 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_45 cut_P1-0Gy_45 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_60 cut_P1-0Gy_60 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_90 cut_P1-0Gy_90 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_5 cut_P1-1Gy_5 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_10 cut_P1-1Gy_10 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_15 cut_P1-1Gy_15 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_30 cut_P1-1Gy_30 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_45 cut_P1-1Gy_45 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_60 cut_P1-1Gy_60 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_90 cut_P1-1Gy_90 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_5 cut_P32-05Gy_5 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_10 cut_P32-05Gy_10 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_15 cut_P32-05Gy_15 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_30 cut_P32-05Gy_30 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_45 cut_P32-05Gy_45 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_60 cut_P32-05Gy_60 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_90 cut_P32-05Gy_90 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_5 cut_P32-0Gy_5 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_10 cut_P32-0Gy_10 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_15 cut_P32-0Gy_15 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_30 cut_P32-0Gy_30 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_45 cut_P32-0Gy_45 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_60 cut_P32-0Gy_60 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_90 cut_P32-0Gy_90 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_5 cut_P32-1Gy-repeat_5 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_10 cut_P32-1Gy-repeat_10 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_15 cut_P32-1Gy-repeat_15 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_30 cut_P32-1Gy-repeat_30 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_45 cut_P32-1Gy-repeat_45 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_60 cut_P32-1Gy-repeat_60 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_90 cut_P32-1Gy-repeat_90 samsal_output || true
+
+################################ ignore this #############################
 ./SamSal_tools.sh time_cutoff_5 cut_H14-05Gy_5 samsal_output \
 && ./SamSal_tools.sh time_cutoff_10 cut_H14-05Gy_10 samsal_output \
 && ./SamSal_tools.sh time_cutoff_15 cut_H14-05Gy_15 samsal_output \
