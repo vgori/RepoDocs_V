@@ -39,7 +39,7 @@ Dependensied: sudo apt install csvkit
       ./run_cuttime_includedSet.sh /media/localarchive/ONT-data/4th-calibration /media/localarchive/ONT-data/4th-calibration/Cutoffs 5 10 15 30 45 60 90
 
   7.2 # Run cuttime for each set in a row
-      ./run_cuttime_forEach_set.sh /media/localarchive/Calibration-4 /media/localarchive/Cutoffs 5 10 15 30 45 60 90
+      ./run_cuttime_includedSet.sh /media/localarchive/ONT-data/4th-calibration /media/localarchive/ONT-data/4th-calibration/Cutoffs 5 10 15 30 45 60 90
 
    # By default run_cuttime_includedSet.sh and run_cuttime_forEach_set.sh use Cutoff_CORE.sh with NUM_CPUS=20
    # You can change in Cutoff_CORE.sh num of CORES to other number like NUM_CPUS=30
@@ -61,7 +61,56 @@ Dependensied: sudo apt install csvkit
 & ./SamSal_tools.sh time_cutoff_15 cut_H14-05Gy_15 samsal_output && fg
 
    8.2 # Run subsequently. it continues running the next command even if the previous one fails
-       # Run for sets: "H14-0Gy" "P1-0Gy" "P32-0Gy" "H14-05Gy" "P1-05Gy" "P32-05Gy" "H14-1Gy" "P1-1Gy" "P32-1Gy-repeat"
+
+
+# 19.08.24 - Run for sets: "H14-4Gy" "H14-5Gy" "P1-01Gy" "P32-2Gy" "P32-3Gy" "P32-4Gy"
+
+./SamSal_tools.sh time_cutoff_5 cut_H14-4Gy_5 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_10 cut_H14-4Gy_10 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_15 cut_H14-4Gy_15 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_30 cut_H14-4Gy_30 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_45 cut_H14-4Gy_45 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_60 cut_H14-4Gy_60 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_90 cut_H14-4Gy_90 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_5 cut_H14-5Gy_5 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_10 cut_H14-5Gy_10 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_15 cut_H14-5Gy_15 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_30 cut_H14-5Gy_30 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_45 cut_H14-5Gy_45 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_60 cut_H14-5Gy_60 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_90 cut_H14-5Gy_90 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_5 cut_P1-01Gy_5 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_10 cut_P1-01Gy_10 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_15 cut_P1-01Gy_15 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_30 cut_P1-01Gy_30 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_45 cut_P1-01Gy_45 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_60 cut_P1-01Gy_60 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_90 cut_P1-01Gy_90 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_5 cut_P32-2Gy_5 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_10 cut_P32-2Gy_10 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_15 cut_P32-2Gy_15 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_30 cut_P32-2Gy_30 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_45 cut_P32-2Gy_45 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_60 cut_P32-2Gy_60 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_90 cut_P32-2Gy_90 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_5 cut_P32-3Gy_5 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_10 cut_P32-3Gy_10 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_15 cut_P32-3Gy_15 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_30 cut_P32-3Gy_30 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_45 cut_P32-3Gy_45 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_60 cut_P32-3Gy_60 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_90 cut_P32-3Gy_90 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_5 cut_P32-4Gy_5 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_10 cut_P32-4Gy_10 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_15 cut_P32-4Gy_15 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_30 cut_P32-4Gy_30 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_45 cut_P32-4Gy_45 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_60 cut_P32-4Gy_60 samsal_output \
+&& ./SamSal_tools.sh time_cutoff_90 cut_P32-4Gy_90 samsal_output || true
+
+
+
+# Run for sets: "H14-0Gy" "P1-0Gy" "P32-0Gy" "H14-05Gy" "P1-05Gy" "P32-05Gy" "H14-1Gy" "P1-1Gy" "P32-1Gy-repeat"
 
 
 ./SamSal_tools.sh time_cutoff_5 cut_H14-05Gy_5 samsal_output \
