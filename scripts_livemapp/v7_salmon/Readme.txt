@@ -2,9 +2,9 @@
 Example for Hezner machine
 
 Location for scripts:
-~/scripts_livemapp/UKserver_version/livebc_timemanager_main_ExpOrNot_salmon_veryFAST.sh
-~/scripts_livemapp/UKserver_version/livebc_cp_fastq.sh
-~/scripts_livemapp/UKserver_version/livebc_mapping_salmon.sh
+~/scripts_livemapp/v7_salmon/livebc_timemanager_main_ExpOrNot_salmon_veryFAST.sh
+~/scripts_livemapp/v7_salmon/livebc_cp_fastq.sh
+~/scripts_livemapp/v7_salmon/livebc_mapping_salmon.sh
 
 
 Paths:
@@ -15,7 +15,7 @@ Reference_Target="/home/veronika/Tachyon_Veronica/Reference_Genome_HomoSapiens/T
 
 Run:
 
-(base) veronika@Ubuntu-2204-jammy-amd64-base:~/scripts_livemapp/UKserver_version$ ./livebc_timemanager_main_ExpOrNot_salmon_veryFAST.sh G
+(base) veronika@Ubuntu-2204-jammy-amd64-base:~/scripts_livemapp/v7_salmon$ ./livebc_timemanager_main_ExpOrNot_salmon_veryFAST.sh G
 
 Example for UK machine
 
