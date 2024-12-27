@@ -173,9 +173,13 @@ tput cup $(($(tput lines) - 1)) $(($(tput cols) - 1))
 echo -ne "\n"
 
 
-kill %3
-kill %2
-kill %1
+#kill %3
+#kill %2
+#kill %1
+
+killall start_livebc_minknow_P2S_version.sh # kill %2
+killall livebc_mapping.sh  # kill %3
+killall livebc_timemanager_main_samtools.sh # kill 1 
 
 # terminate the ss_livebc_timemanager_main.sh after it has completed its execution
 exit
