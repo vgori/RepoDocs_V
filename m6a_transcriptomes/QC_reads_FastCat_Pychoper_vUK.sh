@@ -2,8 +2,9 @@
 
 # chmod +x QC_reads_FastCat_Pychoper_vUK.sh
 # sed -i -e 's/\r$//' QC_reads_FastCat_Pychoper_vUK.sh
-# ./QC_reads_FastCat_Pychoper_vUK.sh /media/localarchive/m6A-P2S-Arraystar/Control-C
- 
+# ./QC_reads_FastCat_Pychoper_vUK.sh /buffer_drive/Yannick-DGE/HEK
+# Seq-cDNA-HEK-2Gy-04  Seq-cDNA-HEK-0Gy-04 Seq-cDNA-HEK-01Gy-04
+#Kit V14 (SQK-PCS114)
 
 exec >> "$1"/logfile_$(date +%F).log 2>&1
 # Start time for Launching script
@@ -13,21 +14,20 @@ start=$(date +%s)
 export HDF5_PLUGIN_PATH="/usr/local/hdf5/lib/plugin"
 threads=100
 # parameters for  fastcat
-q=10 
-a=200
+q=7 
+a=50
 # parameters for pychopper: By Default - Minimum mean base quality (7.0) and  Minimum segment length (50).
 min_qual=7
 min_len=50
-# kit{PCS109,PCS110,PCS111,LSK114}
-kit="PCS109"
-# Detection method: phmm or edlib
-dm="phmm"
+# kit{'PCS109', 'PCS110', 'PCS111', 'PCS114', 'LSK114', 'PCB111', 'PCB114'} 
+kit="PCS114"
+# Detection method: phmm or edlib (edlib  - by default)
+dm="edlib" #  phmm
 
 # Define the common folder path
-Reference_Genome="/media/localarchive/transcriptome_ref"
-# Reference_Genome="/home/cmb-group/upni/media/cmb-group/venus/human_reference/transcriptome"
+Reference_Genome="/buffer_drive/reference"
 
-RG_gtf=$Reference_Genome/Homo_sapiens.GRCh38.113.gtf
+RG_gtf=$Reference_Genome/Homo_sapiens.GRCh38.112.gtf
 RG_fa=$Reference_Genome/Homo_sapiens.GRCh38.cdna.all.fa
 
 basecalled_dirs="$1" #"/path/to/common/folder/basecalled"  
@@ -76,7 +76,7 @@ path_to_fastq_pass=$(find $basecalled_dirs -name "fastq_pass" -type d)
 		conda deactivate
  
 
-		echo -e "${BGreen} Call pychopper to filter out seqs.fastq.gz "
+		echo -e "${BGreen} Call pychopper. The seqs.fastq.gz is filtered reads"
 		# Pychoper
 		# Install: conda install -c conda-forge -c bioconda pychopper
 
