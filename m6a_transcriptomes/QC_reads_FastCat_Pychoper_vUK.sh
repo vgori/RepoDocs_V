@@ -12,7 +12,7 @@ start=$(date +%s)
 
 #PATH=/root/anaconda3/bin:$PATH # Check the path
 export HDF5_PLUGIN_PATH="/usr/local/hdf5/lib/plugin"
-threads=100
+threads=50
 # parameters for  fastcat
 q=7 
 a=50
@@ -95,7 +95,7 @@ path_to_fastq_pass=$(find $basecalled_dirs -name "fastq_pass" -type d)
 
         echo -e "${BGreen} Launching minimap2 with splice -k14"
 		start_map=$(date +%s)
-        minimap2 -ax splice -uf -k14 $RG_fa $pychopper_output/full_length_reads_$setname.fastq | samtools sort -T tmp -o $basecalled_dirs/data_processing/output_sorted_$setname.bam
+        minimap2 -ax splice -uf -k14 $RG_fa $pychopper_output/full_length_reads_$setname.fastq | samtools sort -T tmp_$setname -o $basecalled_dirs/data_processing/output_sorted_$setname.bam
         end_map=$(date +%s)
 		start_samindex=$(date +%s)
 		echo -e "samtools indexing ... "
