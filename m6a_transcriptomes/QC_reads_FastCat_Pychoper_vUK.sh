@@ -2,13 +2,20 @@
 
 # chmod +x QC_reads_FastCat_Pychoper_vUK.sh
 # sed -i -e 's/\r$//' QC_reads_FastCat_Pychoper_vUK.sh
-# ./QC_reads_FastCat_Pychoper_vUK.sh /buffer_drive/Yannick-DGE/HEK
+# ./QC_reads_FastCat_Pychoper_vUK.sh /buffer_drive/Yannick-DGE/HEK -rmed <True/False>
 # Seq-cDNA-HEK-2Gy-04  Seq-cDNA-HEK-0Gy-04 Seq-cDNA-HEK-01Gy-04
 #Kit V14 (SQK-PCS114)
 
 exec >> "$1"/logfile_$(date +%F).log 2>&1
 # Start time for Launching script
 start=$(date +%s)
+
+# chek the number of input argumrnts
+if [ "$#" -lt 2 ]; then
+  echo "Usage: $0 <directory> -rmed <True/False>"
+  exit 1
+fi
+FLAG=$3
 
 #PATH=/root/anaconda3/bin:$PATH # Check the path
 export HDF5_PLUGIN_PATH="/usr/local/hdf5/lib/plugin"
@@ -107,7 +114,7 @@ path_to_fastq_pass=$(find $basecalled_dirs -name "fastq_pass" -type d)
 		
 		
 		echo -e "Run salmon quant in Alignment-Based Mode"
-		salmon quant --noErrorModel -p $threads -t $RG_fa -l SF -a $basecalled_dirs/data_processing/output_sorted_$setname.bam \
+		salmon quant --noErrorModel -p $threads -t $RG_fa -l U -a $basecalled_dirs/data_processing/output_sorted_$setname.bam \
 		-o $basecalled_dirs/data_processing/salmon_quant_alignmentmode_$setname
         # make txt format from quant.sf
 		echo -e "Rewrite quant.sf to quant.txt format "
@@ -142,6 +149,20 @@ path_to_fastq_pass=$(find $basecalled_dirs -name "fastq_pass" -type d)
 		echo "Error: Input folder do not exist."
 		exit 1
 	fi
+	
+# Check the -rmed flag
+if [ "$FLAG" == "True" ]; then
+  echo "Removing unnecessary files and directories..."
+  
+  rm -rf $basecalled_dirs/data_processing/output_sorted_$setname.bam
+  rm -rf $basecalled_dirs/data_processing/output_sorted_$setname.bam.bai
+  rm -rf $basecalled_dirs/data_processing/seqs.fastq.gz
+  rm -rf $pychopper_output/full_length_reads_$setname.fastq
+  rm -rf $pychopper_output/aln_hits.bed
+  echo "Cleanup completed."
+else
+  echo "Cleanup skipped."
+fi
 	
 # End time of the end of script
 end=$(date +%s)

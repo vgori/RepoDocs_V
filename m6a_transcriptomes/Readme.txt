@@ -23,5 +23,12 @@ conda create -n fastcat -c conda-forge -c bioconda -c nanoporetech fastcat
 conda install -c conda-forge -c bioconda pychopper
 
 
+RUN
+Launch the ./QC-reads-loop-inclusive.sh having previously specified the necessary folders for processing and the parameter -rmed True if you want remove mediate files
+
+./QC_reads_FastCat_Pychoper_vUK.sh /buffer_drive/ERASMUS_RadioMarker_PLM/$dir -rmed True
+
+
+
 
 For research purposes only.

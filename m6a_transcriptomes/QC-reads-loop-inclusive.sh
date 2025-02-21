@@ -5,7 +5,7 @@
 # ./QC-reads-loop-inclusive.sh
 
 for dir in RM9-24h-NL-Blood RM9-8wk-NL-Blood; do
-  ./QC_reads_FastCat_Pychoper_vUK.sh /buffer_drive/ERASMUS_RadioMarker_PLM/$dir &
+  ./QC_reads_FastCat_Pychoper_vUK.sh /buffer_drive/ERASMUS_RadioMarker_PLM/$dir -rmed True &
 done
 
 wait
